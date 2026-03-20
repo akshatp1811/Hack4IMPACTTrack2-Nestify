@@ -157,4 +157,124 @@ export const fetchVitalInsight = async (vitalType, period = '30d') => {
   }
 };
 
+// ── MEDICATIONS ─────────────────────────────────────
 
+export const fetchMedications = async (status) => {
+  try {
+    const params = { userId: DEV_USER_ID };
+    if (status) params.status = status;
+    const response = await apiClient.get('/medications', { params });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching medications:', error);
+    throw error;
+  }
+};
+
+export const addMedication = async (medData) => {
+  try {
+    const payload = { ...medData, userId: DEV_USER_ID };
+    const response = await apiClient.post('/medications', payload);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding medication:', error);
+    throw error;
+  }
+};
+
+export const updateMedication = async (id, medData) => {
+  try {
+    const response = await apiClient.put(`/medications/${id}`, medData);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating medication:', error);
+    throw error;
+  }
+};
+
+export const deleteMedication = async (id) => {
+  try {
+    const response = await apiClient.delete(`/medications/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting medication:', error);
+    throw error;
+  }
+};
+
+export const fetchTodaysDoses = async () => {
+  try {
+    const response = await apiClient.get('/medications/doses/today', {
+      params: { userId: DEV_USER_ID }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching today doses:', error);
+    throw error;
+  }
+};
+
+export const logDose = async (doseData) => {
+  try {
+    const payload = { ...doseData, userId: DEV_USER_ID };
+    const response = await apiClient.post('/medications/doses/log', payload);
+    return response.data;
+  } catch (error) {
+    console.error('Error logging dose:', error);
+    throw error;
+  }
+};
+
+export const fetchAdherence = async () => {
+  try {
+    const response = await apiClient.get(`/medications/adherence/${DEV_USER_ID}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching adherence:', error);
+    throw error;
+  }
+};
+
+export const fetchDrugInfo = async (medicationName) => {
+  try {
+    const response = await apiClient.post('/medications/drug-info', { medicationName });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching drug info:', error);
+    throw error;
+  }
+};
+
+export const fetchMedicationById = async (id) => {
+  try {
+    const response = await apiClient.get(`/medications/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching medication by id:', error);
+    throw error;
+  }
+};
+
+export const fetchDoseHistory = async (params) => {
+  try {
+    const response = await apiClient.get('/medications/doses/history', {
+      params: { ...params, userId: DEV_USER_ID }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching dose history:', error);
+    throw error;
+  }
+};
+
+export const fetchCaregiverView = async () => {
+  try {
+    const response = await apiClient.get(`/medications/caregiver/${DEV_USER_ID}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching caregiver view:', error);
+    throw error;
+  }
+};
+
+export { DEV_USER_ID };

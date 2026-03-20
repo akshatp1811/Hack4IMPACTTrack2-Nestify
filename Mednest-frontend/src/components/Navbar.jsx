@@ -41,7 +41,7 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/records" style={{ color: '#0EA5E9', fontWeight: 'bold' }}>All Records</Link></li>
         <li><Link to="/tracking">Tracking</Link></li>
-        <li><a href="/#medication">Medication</a></li>
+        <li><Link to="/medication">Medication</Link></li>
         <li><a href="/#ai-insights">AI Insights</a></li>
         <li><a href="/#emergency">Emergency</a></li>
       </ul>

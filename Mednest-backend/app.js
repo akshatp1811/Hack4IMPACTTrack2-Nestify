@@ -16,6 +16,7 @@ const recordsRoutes = require('./routes/records.routes')
 app.use('/api/v1/records', recordsRoutes)
 const vitalsRoutes = require('./routes/vitals.routes')
 app.use('/api/v1/vitals', vitalsRoutes)
+app.use('/api/v1/medications', require('./routes/medications.routes'))
 
 // ── HEALTH CHECK ────────────────────────────────
 app.get('/api/v1/health', (req, res) => {
