@@ -14,6 +14,8 @@ app.use(express.urlencoded({ extended: true }))
 // ── ROUTES ──────────────────────────────────────
 const recordsRoutes = require('./routes/records.routes')
 app.use('/api/v1/records', recordsRoutes)
+const vitalsRoutes = require('./routes/vitals.routes')
+app.use('/api/v1/vitals', vitalsRoutes)
 
 // ── HEALTH CHECK ────────────────────────────────
 app.get('/api/v1/health', (req, res) => {

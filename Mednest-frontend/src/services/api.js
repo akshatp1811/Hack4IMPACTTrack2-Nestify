@@ -68,3 +68,93 @@ export const compareRecords = async (recordIdA, recordIdB = null) => {
     throw error;
   }
 };
+
+// ── VITALS ──────────────────────────────────────────
+
+/**
+ * Fetches the vitals dashboard for the dev user.
+ */
+export const fetchVitalsDashboard = async () => {
+  try {
+    const response = await apiClient.get(`/vitals/dashboard/${DEV_USER_ID}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching vitals dashboard:', error);
+    throw error;
+  }
+};
+
+/**
+ * Logs a new vital reading.
+ */
+export const logVital = async (vitalData) => {
+  try {
+    const payload = { ...vitalData, userId: DEV_USER_ID };
+    const response = await apiClient.post('/vitals', payload);
+    return response.data;
+  } catch (error) {
+    console.error('Error logging vital:', error);
+    throw error;
+  }
+};
+
+/**
+ * Soft-deletes a vital entry.
+ */
+export const deleteVital = async (entryId) => {
+  try {
+    const response = await apiClient.delete(`/vitals/${entryId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting vital:', error);
+    throw error;
+  }
+};
+
+/**
+ * Fetches paginated vital history.
+ */
+export const fetchVitalHistory = async (vitalType, page = 1, limit = 20, from, to) => {
+  try {
+    const params = { vitalType, page, limit };
+    if (from) params.from = from;
+    if (to) params.to = to;
+    const response = await apiClient.get(`/vitals/history/${DEV_USER_ID}`, { params });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching vital history:', error);
+    throw error;
+  }
+};
+
+/**
+ * Fetches vital trends data arrays for charts.
+ */
+export const fetchVitalTrends = async (vitalType, period = '30d') => {
+  try {
+    const response = await apiClient.get(`/vitals/trends/${DEV_USER_ID}`, {
+      params: { vitalType, period }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching vital trends:', error);
+    throw error;
+  }
+};
+
+/**
+ * Fetches AI insights for a given vital type and period.
+ */
+export const fetchVitalInsight = async (vitalType, period = '30d') => {
+  try {
+    const response = await apiClient.get(`/vitals/insight/${DEV_USER_ID}`, {
+      params: { vitalType, period }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching vital insight:', error);
+    throw error;
+  }
+};
+
+
