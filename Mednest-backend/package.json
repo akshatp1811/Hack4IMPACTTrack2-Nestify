@@ -8,7 +8,8 @@
     "dev": "nodemon server.js",
     "seed": "node seeds/records.seed.js",
     "seed:vitals": "node seeds/vitals.seed.js",
-    "seed:medications": "node seeds/medications.seed.js"
+    "seed:medications": "node seeds/medications.seed.js",
+    "seed:reports": "node seeds/reports.seed.js"
   },
   "keywords": [
     "mednest",
