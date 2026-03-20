@@ -7,6 +7,8 @@ import TrackingDetailPage from './pages/TrackingDetailPage';
 import MedicationsPage from './pages/MedicationsPage';
 import CaregiverViewPage from './pages/CaregiverViewPage';
 import MedicationDetailPage from './pages/MedicationDetailPage';
+import AiInsightsPage from './pages/AiInsightsPage';
+import SharedReportPage from './pages/SharedReportPage';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
       <Route path="/medication" element={<MedicationsPage />} />
       <Route path="/medication/caregiver" element={<CaregiverViewPage />} />
       <Route path="/medication/:id" element={<MedicationDetailPage />} />
+      <Route path="/ai-insights" element={<AiInsightsPage />} />
+      <Route path="/share/report/:token" element={<SharedReportPage />} />
     </Routes>
   );
 }

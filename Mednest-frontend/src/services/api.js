@@ -277,4 +277,56 @@ export const fetchCaregiverView = async () => {
   }
 };
 
+// ── AI REPORTS ──────────────────────────────────────
+
+export const fetchUserReports = async () => {
+  try {
+    const response = await apiClient.get(`/reports/user/${DEV_USER_ID}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user reports:', error);
+    throw error;
+  }
+};
+
+export const generateAiReport = async (type) => {
+  try {
+    const response = await apiClient.post('/reports/generate', { userId: DEV_USER_ID, type });
+    return response.data;
+  } catch (error) {
+    console.error('Error generating AI report:', error);
+    throw error;
+  }
+};
+
+export const exportAiReport = async (reportId) => {
+  try {
+    const response = await apiClient.post(`/reports/${reportId}/export`);
+    return response.data;
+  } catch (error) {
+    console.error('Error exporting AI report:', error);
+    throw error;
+  }
+};
+
+export const getSharedReport = async (token) => {
+  try {
+    const response = await apiClient.get(`/reports/share/${token}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching shared report:', error);
+    throw error;
+  }
+};
+
+export const deleteAiReport = async (reportId) => {
+  try {
+    const response = await apiClient.delete(`/reports/${reportId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting AI report:', error);
+    throw error;
+  }
+};
+
 export { DEV_USER_ID };

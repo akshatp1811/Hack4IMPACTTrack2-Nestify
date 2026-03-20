@@ -19,6 +19,8 @@ const connectDB = require('../config/db')
 const VitalEntry = require('../models/VitalEntry.model')
 const User = require('../models/User.model')
 
+const DEV_USER_ID = '69bb95764168f06db6f394e5'
+
 // ── Helpers ──────────────────────────────────────────
 const rand = (min, max) => Math.random() * (max - min) + min
 const randInt = (min, max) => Math.round(rand(min, max))
@@ -189,9 +191,10 @@ async function seed() {
   console.log('Seeding MedNest vitals data...\n')
 
   // Find or create dev user
-  let user = await User.findOne({ email: 'dev@mednest.local' })
+  let user = await User.findById(DEV_USER_ID)
   if (!user) {
     user = await User.create({
+      _id: DEV_USER_ID,
       fullName: 'Dev User',
       email: 'dev@mednest.local',
       dateOfBirth: new Date('1990-06-15'),
@@ -205,7 +208,7 @@ async function seed() {
     console.log(`Dev user exists: ${user._id}`)
   }
 
-  const userId = user._id
+  const userId = DEV_USER_ID
 
   // Clear existing vitals for dev user
   const deleted = await VitalEntry.deleteMany({ userId })

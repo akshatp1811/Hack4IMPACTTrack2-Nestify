@@ -18,6 +18,8 @@ const User = require('../models/User.model')
 const Medication = require('../models/Medication.model')
 const DoseLog = require('../models/DoseLog.model')
 
+const DEV_USER_ID = '69bb95764168f06db6f394e5'
+
 // ── Helpers ──────────────────────────────────────────
 const rand = (min, max) => Math.random() * (max - min) + min
 const randInt = (min, max) => Math.round(rand(min, max))
@@ -139,9 +141,10 @@ async function seed() {
   console.log('Seeding MedNest medications data...\n')
 
   // Find or create dev user
-  let user = await User.findOne({ email: 'dev@mednest.local' })
+  let user = await User.findById(DEV_USER_ID)
   if (!user) {
     user = await User.create({
+      _id: DEV_USER_ID,
       fullName: 'Dev User',
       email: 'dev@mednest.local',
       dateOfBirth: new Date('1990-06-15'),
@@ -155,7 +158,7 @@ async function seed() {
     console.log(`Dev user exists: ${user._id}`)
   }
 
-  const userId = user._id
+  const userId = DEV_USER_ID
 
   // Clear existing medications & dose logs for dev user
   const delMeds = await Medication.deleteMany({ userId })

@@ -20,7 +20,9 @@ const PLACEHOLDER_IMG = 'https://res.cloudinary.com/demo/image/upload/v1/sample.
 const PLACEHOLDER_CLOUDINARY_ID = 'mednest/records/seed/placeholder'
 
 // Dev user details
+const DEV_USER_ID = '69bb95764168f06db6f394e5'
 const DEV_USER = {
+  _id: DEV_USER_ID,
   fullName: 'Dev User',
   email: 'dev@mednest.local',
   dateOfBirth: new Date('1990-06-15'),
@@ -50,7 +52,7 @@ async function seed() {
   console.log('Seeding MedNest database...\n')
 
   // ── Upsert dev user ──
-  let user = await User.findOne({ email: DEV_USER.email })
+  let user = await User.findOne({ _id: DEV_USER_ID })
   if (!user) {
     user = await User.create(DEV_USER)
     console.log(`Created dev user: ${user._id}`)
@@ -58,7 +60,7 @@ async function seed() {
     console.log(`Dev user exists: ${user._id}`)
   }
 
-  const userId = user._id
+  const userId = DEV_USER_ID
 
   // ── Clear existing seed records ──
   const deleted = await HealthRecord.deleteMany({ userId })

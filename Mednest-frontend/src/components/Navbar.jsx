@@ -42,7 +42,7 @@ const Navbar = () => {
         <li><Link to="/records" style={{ color: '#0EA5E9', fontWeight: 'bold' }}>All Records</Link></li>
         <li><Link to="/tracking">Tracking</Link></li>
         <li><Link to="/medication">Medication</Link></li>
-        <li><a href="/#ai-insights">AI Insights</a></li>
+        <li><Link to="/ai-insights">AI Insights</Link></li>
         <li><a href="/#emergency">Emergency</a></li>
       </ul>
       <button 
